@@ -3,6 +3,7 @@ package net.darkmorford.jas.proxy
 import net.darkmorford.jas.JustAnotherSnad
 import net.darkmorford.jas.block.BlockSnad
 import net.darkmorford.jas.init.ModBlocks
+import net.darkmorford.jas.item.ItemBlockSnadMeta
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
@@ -16,7 +17,7 @@ import org.apache.logging.log4j.Level
 
 @Mod.EventBusSubscriber
 open class CommonProxy {
-	fun preInit(event: FMLPreInitializationEvent) {
+	open fun preInit(event: FMLPreInitializationEvent) {
 		JustAnotherSnad.logger!!.log(Level.INFO, "common proxy preInit")
 	}
 
@@ -44,7 +45,9 @@ open class CommonProxy {
 			val registry = event.registry
 
 			// ItemBlocks
-			registry.register(ItemBlock(ModBlocks.snad).setRegistryName(ModBlocks.snad.registryName!!))
+			registry.register(ItemBlockSnadMeta(ModBlocks.snad).setRegistryName(ModBlocks.snad.registryName!!))
 		}
 	}
 }
+
+
