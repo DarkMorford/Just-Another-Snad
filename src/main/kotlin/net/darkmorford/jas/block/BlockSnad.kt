@@ -68,7 +68,7 @@ class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 				if (world.getBlockState(position.up(height)).block != null) {
 					val nextPlantBlock = world.getBlockState(position.up(height)).block
 					if (nextPlantBlock::class.java == blockAbove::class.java) {
-						for (growthAttempts in 0..2) {
+						for (growthAttempts in 0..2) { //TODO: Make Configurable
 							if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, blockAbove as IPlantable)) {
 								nextPlantBlock.updateTick(world, position.up(height), world.getBlockState(position.up(height)), random)
 							}
@@ -115,9 +115,7 @@ class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 	}
 
 	companion object {
-		private val snadClass = EnumType::class
-		private val snadJavaClass = snadClass.java
-		private val VARIANT: PropertyEnum<AbsBlockSnad.EnumType> = PropertyEnum.create("variant", snadJavaClass)
+		private val VARIANT: PropertyEnum<AbsBlockSnad.EnumType> = PropertyEnum.create("variant", EnumType::class.java)
 	}
 
 
