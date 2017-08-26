@@ -1,9 +1,9 @@
 {
   "variants": {
-	"variant=red_snad": {
+	"variant=red_sand": {
 	  "model": "justanothersnad:red_snad"
 	},
-	"variant=snad": {
+	"variant=sand": {
 	  "model": "justanothersnad:snad"
 	}
   }

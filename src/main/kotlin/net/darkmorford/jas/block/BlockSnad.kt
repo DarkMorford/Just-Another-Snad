@@ -4,6 +4,7 @@ import net.darkmorford.jas.JustAnotherSnad
 import net.darkmorford.jas.item.IMetaBlockSnad
 import net.minecraft.block.BlockCactus
 import net.minecraft.block.BlockReed
+import net.minecraft.block.BlockSand
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.MapColor
 import net.minecraft.block.material.Material
@@ -25,7 +26,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
 
-class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
+class BlockSnad : BlockSand(), IMetaBlockSnad {
 
 	override fun getSpecialName(stack: ItemStack): String {
 		return if (stack.itemDamage == 0) "default" else "red"
@@ -33,27 +34,6 @@ class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 
 	override fun createBlockState(): BlockStateContainer {
 		return BlockStateContainer(this, VARIANT)
-	}
-
-	override fun getStateFromMeta(meta: Int): IBlockState {
-		return defaultState.withProperty(VARIANT, EnumType.byMetadata(meta))
-	}
-
-	override fun getMetaFromState(state: IBlockState): Int {
-		return state.getValue(VARIANT).metadata
-	}
-
-	override fun getPickBlock(state: IBlockState?, target: RayTraceResult?, world: World, position: BlockPos?, player: EntityPlayer?): ItemStack {
-		return ItemStack(Item.getItemFromBlock(this), 1, getMetaFromState(world.getBlockState(position)))
-	}
-
-	@SideOnly(Side.CLIENT)
-	override fun getDustColor(state: IBlockState): Int {
-		return state.getValue(VARIANT).dustColor
-	}
-
-	override fun getMapColor(state: IBlockState, world: IBlockAccess?, postion: BlockPos?): MapColor {
-		return state.getValue(VARIANT).mapColor
 	}
 
 	override fun updateTick(world: World, position: BlockPos, state: IBlockState, random: Random) {
@@ -110,13 +90,11 @@ class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 		tickRandomly = true
 
 		unlocalizedName = "snad"
-		defaultState = blockState.baseState.withProperty(VARIANT, EnumType.SNAD)
+		defaultState = blockState.baseState.withProperty(VARIANT, BlockSand.EnumType.SAND)
 		setRegistryName(JustAnotherSnad.MODID, "snad")
 	}
 
 	companion object {
-		private val VARIANT: PropertyEnum<AbsBlockSnad.EnumType> = PropertyEnum.create("variant", EnumType::class.java)
+		private val VARIANT: PropertyEnum<BlockSand.EnumType> = PropertyEnum.create("variant", BlockSand.EnumType::class.java)
 	}
-
-
 }
