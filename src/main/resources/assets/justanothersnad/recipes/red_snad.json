@@ -1,17 +1,22 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-	"S",
-	"S"
-  ],
-  "key": {
-	"S": {
-	  "item": "minecraft:sand",
-	  "data": 1
+	"result": {
+		"item": "justanothersnad:snad",
+		"data": 1
+	},
+	"pattern": [
+		"s s",
+		" b ",
+		"s s"
+	],
+	"type": "minecraft:crafting_shaped",
+	"key": {
+		"s": {
+			"item": "minecraft:sand",
+			"data": 1
+		},
+		"b": {
+			"item": "minecraft:dye",
+			"data": 15
+		}
 	}
-  },
-  "result": {
-	"item": "justanothersnad:snad",
-	"data": 1
-  }
 }
