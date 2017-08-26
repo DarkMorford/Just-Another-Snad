@@ -2,6 +2,8 @@ package net.darkmorford.jas.block
 
 import net.darkmorford.jas.JustAnotherSnad
 import net.darkmorford.jas.item.IMetaBlockSnad
+import net.minecraft.block.BlockCactus
+import net.minecraft.block.BlockReed
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
@@ -12,8 +14,12 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
+import net.minecraft.world.World
 import net.minecraftforge.common.EnumPlantType
 import net.minecraftforge.common.IPlantable
+import org.apache.logging.log4j.Level
+import java.util.*
+import javax.security.auth.login.Configuration
 
 class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 
@@ -33,7 +39,35 @@ class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 		return state.getValue(VARIANT).metadata
 	}
 
-	override fun canSustainPlant(state: IBlockState, world: IBlockAccess, position: BlockPos, facing : EnumFacing, plantable: IPlantable): Boolean {
+	override fun updateTick(world: World, position: BlockPos, state: IBlockState, random: Random) {
+		val blockAbove = world.getBlockState(position.up()).block
+		if (blockAbove is BlockReed || blockAbove is BlockCactus) {
+			var isSameBlockType = true
+			var height = 1
+
+			while (isSameBlockType) {
+				if (world.getBlockState(position.up(height)).block != null) {
+					val nextPlantBlock = world.getBlockState(position.up(height)).block
+					if (nextPlantBlock::class.java == blockAbove::class.java) {
+						for(growthAttempts in 0..2) {
+							if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, blockAbove as IPlantable)) {
+								nextPlantBlock.updateTick(world, position.up(height), world.getBlockState(position.up(height)), random)
+							}
+						}
+						height++
+					} else {
+						isSameBlockType = false
+					}
+				} else {
+					isSameBlockType = false
+				}
+			}
+		} else if (blockAbove is IPlantable) {
+			blockAbove.updateTick(world, position.up(), world.getBlockState(position.up()), random)
+		}
+	}
+
+	override fun canSustainPlant(state: IBlockState, world: IBlockAccess, position: BlockPos, facing : EnumFacing?, plantable: IPlantable): Boolean {
 		val plantPosition = BlockPos(position.x, position.y + 1, position.z)
 		val plantType = plantable.getPlantType(world, plantPosition)
 
