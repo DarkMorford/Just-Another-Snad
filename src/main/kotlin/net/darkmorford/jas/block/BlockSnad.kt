@@ -57,6 +57,8 @@ class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 	}
 
 	override fun updateTick(world: World, position: BlockPos, state: IBlockState, random: Random) {
+		super.updateTick(world, position, state, random)
+
 		val blockAbove = world.getBlockState(position.up()).block
 		if (blockAbove is BlockReed || blockAbove is BlockCactus) {
 			var isSameBlockType = true
