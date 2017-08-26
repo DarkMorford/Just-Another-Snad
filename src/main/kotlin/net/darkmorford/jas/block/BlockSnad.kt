@@ -2,15 +2,30 @@ package net.darkmorford.jas.block
 
 import net.darkmorford.jas.JustAnotherSnad
 import net.darkmorford.jas.item.IMetaBlockSnad
-import net.minecraft.block.BlockSand
 import net.minecraft.block.SoundType
+import net.minecraft.block.properties.PropertyEnum
+import net.minecraft.block.state.BlockStateContainer
+import net.minecraft.block.state.IBlockState
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.ItemStack
+import scala.tools.nsc.transform.patmat.ScalaLogic
 
-class BlockSnad : BlockSand(), IMetaBlockSnad {
+class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 
 	override fun getSpecialName(stack: ItemStack): String {
 		return if (stack.itemDamage == 0) "default" else "red"
+	}
+
+	override fun createBlockState(): BlockStateContainer {
+		return BlockStateContainer(this, VARIANT)
+	}
+
+	override fun getStateFromMeta(meta: Int): IBlockState {
+		return defaultState.withProperty(VARIANT, EnumType.byMetadata(meta))
+	}
+
+	override fun getMetaFromState(state: IBlockState): Int {
+		return state.getValue(VARIANT).metadata
 	}
 
 	init {
@@ -20,6 +35,15 @@ class BlockSnad : BlockSand(), IMetaBlockSnad {
         tickRandomly = true
 
         unlocalizedName = "snad"
-        setRegistryName(JustAnotherSnad.MODID, "snad")
+		defaultState = blockState.baseState.withProperty(VARIANT, EnumType.SNAD)
+		setRegistryName(JustAnotherSnad.MODID, "snad")
     }
+
+	companion object {
+		private val snadClass = EnumType::class
+		private val snadJavaClass = snadClass.java
+	    private val VARIANT: PropertyEnum<AbsBlockSnad.EnumType> = PropertyEnum.create("variant", snadJavaClass)
+	}
+
+
 }
