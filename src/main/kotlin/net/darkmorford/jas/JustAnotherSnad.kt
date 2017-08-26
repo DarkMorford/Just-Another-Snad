@@ -24,22 +24,22 @@ object JustAnotherSnad {
 	var proxy: CommonProxy? = null
 	var logger: Logger? = null
 
-    @EventHandler
-    fun preInit(event: FMLPreInitializationEvent) {
-        logger = event.modLog
+	@EventHandler
+	fun preInit(event: FMLPreInitializationEvent) {
+		logger = event.modLog
 		logger!!.log(Level.INFO, "preInit")
-        proxy!!.preInit(event)
-    }
+		proxy!!.preInit(event)
+	}
 
-    @EventHandler
-    fun init(event: FMLInitializationEvent) {
-        proxy!!.init(event)
+	@EventHandler
+	fun init(event: FMLInitializationEvent) {
+		proxy!!.init(event)
 		logger!!.log(Level.INFO, "init")
-    }
+	}
 
-    @EventHandler
-    fun postInit(event: FMLPostInitializationEvent) {
-        proxy!!.postInit(event)
+	@EventHandler
+	fun postInit(event: FMLPostInitializationEvent) {
+		proxy!!.postInit(event)
 		logger!!.log(Level.INFO, "postInit")
-    }
+	}
 }

@@ -4,7 +4,7 @@ import net.minecraft.block.Block
 import net.minecraft.item.ItemBlock
 import net.minecraft.item.ItemStack
 
-class ItemBlockSnadMeta(block: Block): ItemBlock(block) {
+class ItemBlockSnadMeta(block: Block) : ItemBlock(block) {
 	init {
 		if (block !is IMetaBlockSnad) {
 			throw IllegalArgumentException(String.format(
@@ -24,6 +24,4 @@ class ItemBlockSnadMeta(block: Block): ItemBlock(block) {
 	}
 }
 
-interface IMetaBlockSnad {
-	fun getSpecialName(stack: ItemStack): String
-}
+

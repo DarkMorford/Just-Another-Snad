@@ -8,7 +8,6 @@ import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.ItemStack
-import scala.tools.nsc.transform.patmat.ScalaLogic
 
 class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 
@@ -29,20 +28,20 @@ class BlockSnad : AbsBlockSnad(), IMetaBlockSnad {
 	}
 
 	init {
-        setCreativeTab(CreativeTabs.MISC)
-        setHardness(0.5f)
-        soundType = SoundType.SAND
-        tickRandomly = true
+		setCreativeTab(CreativeTabs.MISC)
+		setHardness(0.5f)
+		soundType = SoundType.SAND
+		tickRandomly = true
 
-        unlocalizedName = "snad"
+		unlocalizedName = "snad"
 		defaultState = blockState.baseState.withProperty(VARIANT, EnumType.SNAD)
 		setRegistryName(JustAnotherSnad.MODID, "snad")
-    }
+	}
 
 	companion object {
 		private val snadClass = EnumType::class
 		private val snadJavaClass = snadClass.java
-	    private val VARIANT: PropertyEnum<AbsBlockSnad.EnumType> = PropertyEnum.create("variant", snadJavaClass)
+		private val VARIANT: PropertyEnum<AbsBlockSnad.EnumType> = PropertyEnum.create("variant", snadJavaClass)
 	}
 
 

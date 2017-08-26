@@ -1,12 +1,10 @@
 package net.darkmorford.jas.proxy
 
 import net.darkmorford.jas.JustAnotherSnad
-import net.darkmorford.jas.block.BlockSnad
 import net.darkmorford.jas.init.ModBlocks
 import net.darkmorford.jas.item.ItemBlockSnadMeta
 import net.minecraft.block.Block
 import net.minecraft.item.Item
-import net.minecraft.item.ItemBlock
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
