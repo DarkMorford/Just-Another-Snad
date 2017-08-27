@@ -27,11 +27,10 @@ public class BlockSoulSnad extends BlockSoulSand {
 		setRegistryName(JustAnotherSnad.MODID, "soul_snad");
 	}
 
-
 	@Override
 	public void updateTick(World world, BlockPos position, IBlockState state, Random random) {
-		JustAnotherSnad.logger.log(Level.INFO, String.format("Update Tick Soul Snad: %s", position.toString()));
 		super.updateTick(world, position, state, random);
+
 		Block blockAbove = world.getBlockState(position.up()).getBlock();
 		if (blockAbove instanceof BlockNetherWart) {
 			boolean isSameBlockType = true;
@@ -42,8 +41,6 @@ public class BlockSoulSnad extends BlockSoulSand {
 			}
 		}
 	}
-
-
 
 	@Override
 	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos position, EnumFacing facing, IPlantable plantable) {
