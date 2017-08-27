@@ -2,11 +2,9 @@ package net.darkmorford.jas.proxy;
 
 import net.darkmorford.jas.JustAnotherSnad;
 import net.darkmorford.jas.init.ModBlocks;
-import net.darkmorford.jas.item.ItemBlockSnadMeta;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.Level;
 
 @Mod.EventBusSubscriber
