@@ -1,5 +1,7 @@
 package net.darkmorford.jas.block;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import net.darkmorford.jas.JustAnotherSnad;
 import net.darkmorford.jas.item.IMetaBlockSnad;
 import net.minecraft.block.*;
@@ -23,12 +25,13 @@ public class BlockSnad extends BlockSand implements IMetaBlockSnad {
 	private static PropertyEnum<EnumType> VARIANT = PropertyEnum.create("variant", BlockSand.EnumType.class);
 
 	public BlockSnad() {
+		super();
 		setCreativeTab(CreativeTabs.MISC);
 		setHardness(0.5f);
 		setSoundType(SoundType.SAND);
 		setTickRandomly(true);
 		setUnlocalizedName("snad");
-		setRegistryName(JustAnotherSnad.MODID,"snad");
+		setRegistryName(JustAnotherSnad.MODID, "snad");
 	}
 
 	@Override
@@ -42,28 +45,24 @@ public class BlockSnad extends BlockSand implements IMetaBlockSnad {
 	}
 
 	@Override
-	public void updateTick(World world, BlockPos position, IBlockState state, Random random) {
+	public void updateTick(@NotNull World world, BlockPos position, @Nullable IBlockState state,@Nullable Random random) {
 		super.updateTick(world, position, state, random);
 		Block blockAbove = world.getBlockState(position.up()).getBlock();
 		if (blockAbove instanceof BlockReed || blockAbove instanceof BlockCactus) {
 			boolean isSameBlockType = true;
 			int height = 1;
 			while (isSameBlockType) {
-				if (world.getBlockState(position.up(height)).getBlock() != null) {
-					Block nextPlantBlock = world.getBlockState(position.up(height)).getBlock();
-					if (nextPlantBlock.getClass() == blockAbove.getClass()) {
-						for(int growthAttempts = 0; growthAttempts < 2; growthAttempts ++) {
-							if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, (IPlantable) blockAbove)) {
-								nextPlantBlock.updateTick(world, position.up(height), world.getBlockState(position.up(height)), random);
-							}
-						}
-						height ++;
-					} else {
-						isSameBlockType = false;
-					}
-				} else {
-					isSameBlockType = false;
-				}
+				Block nextPlantBlock = world.getBlockState(position.up(height)).getBlock();
+				if (nextPlantBlock.getClass() == blockAbove.getClass()) {
+                    for (int growthAttempts = 0; growthAttempts < 2; growthAttempts++) {
+                        if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, (IPlantable) blockAbove)) {
+                            nextPlantBlock.updateTick(world, position.up(height), world.getBlockState(position.up(height)), random);
+                        }
+                    }
+                    height++;
+                } else {
+                    isSameBlockType = false;
+                }
 			}
 		} else if (blockAbove instanceof IPlantable) {
 			blockAbove.updateTick(world, position.up(), world.getBlockState(position.up()), random);
@@ -79,9 +78,9 @@ public class BlockSnad extends BlockSand implements IMetaBlockSnad {
 				return true;
 			case Beach:
 				return ((world.getBlockState(new BlockPos(position.getX() - 1, position.getY(), position.getZ())).getMaterial() == Material.WATER) ||
-							(world.getBlockState(new BlockPos(position.getX() + 1, position.getY(), position.getZ())).getMaterial() == Material.WATER) ||
-							(world.getBlockState(new BlockPos(position.getX(), position.getY(), position.getZ() + 1)).getMaterial() == Material.WATER) ||
-							(world.getBlockState(new BlockPos(position.getX(), position.getY(), position.getZ() - 1)).getMaterial() == Material.WATER));
+						(world.getBlockState(new BlockPos(position.getX() + 1, position.getY(), position.getZ())).getMaterial() == Material.WATER) ||
+						(world.getBlockState(new BlockPos(position.getX(), position.getY(), position.getZ() + 1)).getMaterial() == Material.WATER) ||
+						(world.getBlockState(new BlockPos(position.getX(), position.getY(), position.getZ() - 1)).getMaterial() == Material.WATER));
 
 			case Water:
 				return (world.getBlockState(position).getMaterial() == Material.WATER) && (world.getBlockState(position) == getDefaultState());

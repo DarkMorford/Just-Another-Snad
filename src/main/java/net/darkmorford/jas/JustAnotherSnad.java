@@ -6,7 +6,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = JustAnotherSnad.MODID, name = JustAnotherSnad.MODNAME, version = JustAnotherSnad.VERSION, acceptedMinecraftVersions = "[1.12,1.13)", useMetadata = true)
@@ -19,26 +18,23 @@ public class JustAnotherSnad {
 	public static JustAnotherSnad instance;
 
 	@SidedProxy(clientSide = "net.darkmorford.jas.proxy.ClientProxy", serverSide = "net.darkmorford.jas.proxy.ServerProxy")
-	private static CommonProxy proxy;
+	public static CommonProxy proxy;
 
 	public static Logger logger;
 
 	@Mod.EventHandler
-	public static void preInit(FMLPreInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
-		logger.log(Level.INFO,"preInit");
 		proxy.preInit(event);
 	}
 
 	@Mod.EventHandler
-	public static void init(FMLInitializationEvent event) {
-		logger.log(Level.INFO, "init");
+	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
 	}
 
 	@Mod.EventHandler
-	public static void postInit(FMLPostInitializationEvent event) {
-		logger.log(Level.INFO, "postInit");
+	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
 	}
 }

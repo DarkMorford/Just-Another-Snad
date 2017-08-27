@@ -19,11 +19,14 @@ import org.apache.logging.log4j.Level;
 @Mod.EventBusSubscriber
 public class CommonProxy {
 
-	public void preInit(FMLPreInitializationEvent event) {}
+	public void preInit(FMLPreInitializationEvent event) {
+	}
 
-	public void init(FMLInitializationEvent event) {}
+	public void init(FMLInitializationEvent event) {
+	}
 
-	public void postInit(FMLPostInitializationEvent event) {}
+	public void postInit(FMLPostInitializationEvent event) {
+	}
 
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
