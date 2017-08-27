@@ -1,14 +1,12 @@
 package net.darkmorford.jas.block;
 
 import net.darkmorford.jas.JustAnotherSnad;
-import net.darkmorford.jas.item.IMetaBlockSnad;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -18,9 +16,7 @@ import net.minecraftforge.common.IPlantable;
 
 import java.util.Random;
 
-public class BlockSnad extends BlockSand implements IMetaBlockSnad {
-
-	private static PropertyEnum<EnumType> VARIANT = PropertyEnum.create("variant", BlockSand.EnumType.class);
+public class BlockSnad extends BlockSand {
 
 	public BlockSnad() {
 		super();
@@ -30,16 +26,6 @@ public class BlockSnad extends BlockSand implements IMetaBlockSnad {
 		setTickRandomly(true);
 		setUnlocalizedName("snad");
 		setRegistryName(JustAnotherSnad.MODID, "snad");
-	}
-
-	@Override
-	public String getSpecialName(ItemStack stack) {
-		return (stack.getItemDamage() == 0) ? "default" : "red";
-	}
-
-	@Override
-	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, VARIANT);
 	}
 
 	@Override
