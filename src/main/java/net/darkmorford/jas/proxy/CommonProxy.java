@@ -2,10 +2,10 @@ package net.darkmorford.jas.proxy;
 
 import net.darkmorford.jas.JustAnotherSnad;
 import net.darkmorford.jas.init.ModBlocks;
-import net.darkmorford.jas.item.ItemBlockSoulSnadMeta;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMultiTexture;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -41,14 +41,9 @@ public class CommonProxy {
 		IForgeRegistry<Item> registry = event.getRegistry();
 
 		// Special Items
-		Item snadBlock = new ItemMultiTexture(ModBlocks.snad, ModBlocks.snad, new ItemMultiTexture.Mapper() {
-			@Override
-			public String apply(ItemStack stack) {
-				return BlockSand.EnumType.byMetadata(stack.getMetadata()).getUnlocalizedName();
-			}
-		}).setRegistryName(ModBlocks.snad.getRegistryName());
+		Item snadBlock = new ItemMultiTexture(ModBlocks.snad, ModBlocks.snad, stack -> BlockSand.EnumType.byMetadata(stack.getMetadata()).getUnlocalizedName()).setRegistryName(ModBlocks.snad.getRegistryName());
 
-		Item soulSnadBlock = new ItemBlockSoulSnadMeta(ModBlocks.soulSnad)
+		Item soulSnadBlock = new ItemBlock(ModBlocks.soulSnad)
 				.setRegistryName(ModBlocks.soulSnad.getRegistryName());
 
 		// ItemBlocks
