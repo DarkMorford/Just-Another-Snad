@@ -18,8 +18,6 @@ import java.util.Random;
 
 public class BlockSnad extends BlockSand {
 
-	private static PropertyEnum<EnumType> VARIANT = PropertyEnum.create("variant", BlockSand.EnumType.class);
-
 	public BlockSnad() {
 		super();
 		setCreativeTab(CreativeTabs.MISC);
@@ -28,11 +26,6 @@ public class BlockSnad extends BlockSand {
 		setTickRandomly(true);
 		setUnlocalizedName("snad");
 		setRegistryName(JustAnotherSnad.MODID, "snad");
-	}
-
-	@Override
-	public BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, VARIANT);
 	}
 
 	@Override
