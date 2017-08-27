@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+	"all": "justanothersnad:blocks/soul_snad"
+  }
+}

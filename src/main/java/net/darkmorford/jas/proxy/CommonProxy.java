@@ -2,6 +2,7 @@ package net.darkmorford.jas.proxy;
 
 import net.darkmorford.jas.JustAnotherSnad;
 import net.darkmorford.jas.init.ModBlocks;
+import net.darkmorford.jas.item.ItemBlockSoulSnadMeta;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSand;
 import net.minecraft.item.Item;
@@ -31,7 +32,7 @@ public class CommonProxy {
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		JustAnotherSnad.logger.log(Level.INFO, "Registering blocks");
-		event.getRegistry().registerAll(ModBlocks.snad);
+		event.getRegistry().registerAll(ModBlocks.snad, ModBlocks.soulSnad);
 	}
 
 	@SubscribeEvent
@@ -47,7 +48,10 @@ public class CommonProxy {
 			}
 		}).setRegistryName(ModBlocks.snad.getRegistryName());
 
+		Item soulSnadBlock = new ItemBlockSoulSnadMeta(ModBlocks.soulSnad)
+				.setRegistryName(ModBlocks.soulSnad.getRegistryName());
+
 		// ItemBlocks
-		registry.register(snadBlock);
+		registry.registerAll(snadBlock, soulSnadBlock);
 	}
 }
