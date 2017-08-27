@@ -41,7 +41,8 @@ public class CommonProxy {
 		IForgeRegistry<Item> registry = event.getRegistry();
 
 		// Special Items
-		Item snadBlock = new ItemMultiTexture(ModBlocks.snad, ModBlocks.snad, stack -> BlockSand.EnumType.byMetadata(stack.getMetadata()).getUnlocalizedName()).setRegistryName(ModBlocks.snad.getRegistryName());
+		Item snadBlock = new ItemMultiTexture(ModBlocks.snad, ModBlocks.snad, stack -> BlockSand.EnumType.byMetadata(stack.getMetadata()).getUnlocalizedName())
+				.setRegistryName(ModBlocks.snad.getRegistryName());
 
 		Item soulSnadBlock = new ItemBlock(ModBlocks.soulSnad)
 				.setRegistryName(ModBlocks.soulSnad.getRegistryName());
