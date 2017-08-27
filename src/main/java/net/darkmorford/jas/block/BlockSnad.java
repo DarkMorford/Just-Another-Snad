@@ -1,10 +1,9 @@
 package net.darkmorford.jas.block;
 
 import net.darkmorford.jas.JustAnotherSnad;
+import net.darkmorford.jas.configuration.ConfigurationData;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.EnumFacing;
@@ -38,7 +37,7 @@ public class BlockSnad extends BlockSand {
 			while (isSameBlockType) {
 				Block nextPlantBlock = world.getBlockState(position.up(height)).getBlock();
 				if (nextPlantBlock.getClass() == blockAbove.getClass()) {
-					for (int growthAttempts = 0; growthAttempts < 2; growthAttempts++) {
+					for (int growthAttempts = 0; growthAttempts < ConfigurationData.SNAD_SPEED_INCREASE_VALUE; growthAttempts++) {
 						if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, (IPlantable) blockAbove)) {
 							nextPlantBlock.updateTick(world, position.up(height), world.getBlockState(position.up(height)), random);
 						}

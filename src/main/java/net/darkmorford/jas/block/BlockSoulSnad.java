@@ -1,6 +1,7 @@
 package net.darkmorford.jas.block;
 
 import net.darkmorford.jas.JustAnotherSnad;
+import net.darkmorford.jas.configuration.ConfigurationData;
 import net.minecraft.block.*;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -34,7 +35,7 @@ public class BlockSoulSnad extends BlockSoulSand {
 		Block blockAbove = world.getBlockState(position.up()).getBlock();
 		if (blockAbove instanceof BlockNetherWart) {
 			boolean isSameBlockType = true;
-			for (int growthAttempts = 0; growthAttempts < 5; growthAttempts++) { // TODO: Configurable
+			for (int growthAttempts = 0; growthAttempts < ConfigurationData.SOUL_SNAD_SPEED_INCREASE_VALUE; growthAttempts++) {
 				if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, (IPlantable) blockAbove)) {
 					blockAbove.updateTick(world, position.up(), world.getBlockState(position.up()), random);
 				}
