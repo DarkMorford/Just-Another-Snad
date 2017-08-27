@@ -1,7 +1,5 @@
 package net.darkmorford.jas.block;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import net.darkmorford.jas.JustAnotherSnad;
 import net.darkmorford.jas.item.IMetaBlockSnad;
 import net.minecraft.block.*;
@@ -45,7 +43,7 @@ public class BlockSnad extends BlockSand implements IMetaBlockSnad {
 	}
 
 	@Override
-	public void updateTick(@NotNull World world, BlockPos position, @Nullable IBlockState state,@Nullable Random random) {
+	public void updateTick(World world, BlockPos position, IBlockState state, Random random) {
 		super.updateTick(world, position, state, random);
 		Block blockAbove = world.getBlockState(position.up()).getBlock();
 		if (blockAbove instanceof BlockReed || blockAbove instanceof BlockCactus) {
@@ -54,15 +52,15 @@ public class BlockSnad extends BlockSand implements IMetaBlockSnad {
 			while (isSameBlockType) {
 				Block nextPlantBlock = world.getBlockState(position.up(height)).getBlock();
 				if (nextPlantBlock.getClass() == blockAbove.getClass()) {
-                    for (int growthAttempts = 0; growthAttempts < 2; growthAttempts++) {
-                        if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, (IPlantable) blockAbove)) {
-                            nextPlantBlock.updateTick(world, position.up(height), world.getBlockState(position.up(height)), random);
-                        }
-                    }
-                    height++;
-                } else {
-                    isSameBlockType = false;
-                }
+					for (int growthAttempts = 0; growthAttempts < 2; growthAttempts++) {
+						if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, (IPlantable) blockAbove)) {
+							nextPlantBlock.updateTick(world, position.up(height), world.getBlockState(position.up(height)), random);
+						}
+					}
+					height++;
+				} else {
+					isSameBlockType = false;
+				}
 			}
 		} else if (blockAbove instanceof IPlantable) {
 			blockAbove.updateTick(world, position.up(), world.getBlockState(position.up()), random);
