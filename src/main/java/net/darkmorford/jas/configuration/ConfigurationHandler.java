@@ -57,4 +57,8 @@ public class ConfigurationHandler {
 	public static void onConfigurationChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 		if (event.getModID().equalsIgnoreCase(JustAnotherSnad.MODID)) updateConfiguration();
 	}
+
+	public static void checkConfigurationChange() {
+		if (configuration.hasChanged()) configuration.save();
+	}
 }

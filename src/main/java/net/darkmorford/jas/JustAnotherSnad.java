@@ -42,5 +42,6 @@ public class JustAnotherSnad {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
+		ConfigurationHandler.checkConfigurationChange();
 	}
 }
