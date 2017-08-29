@@ -1,5 +1,6 @@
 package net.darkmorford.jas;
 
+import net.darkmorford.jas.configuration.ConfigurationHandler;
 import net.darkmorford.jas.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -25,6 +26,11 @@ public class JustAnotherSnad {
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		logger = event.getModLog();
+
+		ConfigurationHandler.setConfigFile(event.getSuggestedConfigurationFile());
+		ConfigurationHandler.init();
+		ConfigurationHandler.updateConfiguration();
+
 		proxy.preInit(event);
 	}
 
@@ -36,5 +42,6 @@ public class JustAnotherSnad {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
+		ConfigurationHandler.checkConfigurationChange();
 	}
 }
