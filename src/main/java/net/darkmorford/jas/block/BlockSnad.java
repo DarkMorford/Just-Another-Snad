@@ -1,5 +1,6 @@
 package net.darkmorford.jas.block;
 
+import net.darkmorford.jas.JustAnotherSnad;
 import net.darkmorford.jas.configuration.ConfigurationData;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -11,6 +12,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
+import org.apache.logging.log4j.Level;
 
 import java.util.Random;
 
@@ -41,21 +43,18 @@ public class BlockSnad extends BlockSand {
     }
 
     private void checkColumnOfPlant(World world, BlockPos position, Random random, Block blockAbove) {
-        boolean isSameBlockType = true;
+        JustAnotherSnad.logger.log(Level.INFO, "checkColumnOfPlant");
         int height = 1;
-        while (isSameBlockType) {
-            Block nextPlantBlock = world.getBlockState(position.up(height)).getBlock();
-            if (nextPlantBlock.getClass().equals(blockAbove.getClass())) {
-                growthLoop(world, position, random, (IPlantable) blockAbove, height, nextPlantBlock);
-                height++;
-            } else {
-                isSameBlockType = false;
-            }
+        Block nextPlantBlock;
+        while ((nextPlantBlock = world.getBlockState(position.up(height)).getBlock()).getClass().equals(blockAbove.getClass())) {
+            JustAnotherSnad.logger.log(Level.INFO, "do growthLoop");
+            growthLoop(world, position, random, (IPlantable) blockAbove, height, nextPlantBlock);
+            height++;
         }
     }
 
-    private void growthLoop(World world, BlockPos position, Random random, IPlantable blockAbove, int height, Block nextPlantBlock) {
-        for (int growthAttempts = 0; growthAttempts < ConfigurationData.SNAD_SPEED_INCREASE_VALUE; growthAttempts++) {
+    private void growthLoop(World world, BlockPos position, Random random, IPlantable blockAbove,int height, Block nextPlantBlock) {
+        for (int growthAttempts = 0; growthAttempts < ConfigurationData.SNAD_SPEED_INCREASE_VALUE * 10; growthAttempts++) {
             if (growthAttempts == 0 || canSustainPlant(world.getBlockState(position), world, position, null, blockAbove)) {
                 nextPlantBlock.randomTick(world, position.up(height), world.getBlockState(position.up(height)), random);
             }
