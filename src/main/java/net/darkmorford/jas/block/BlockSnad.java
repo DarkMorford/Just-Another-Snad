@@ -44,10 +44,8 @@ public class BlockSnad extends BlockSand {
 
     private void checkColumnOfPlant(World world, BlockPos originalPosition, Random random, Block blockAbove) {
         Block nextPlantBlock;
-        BlockPos nextPosition = originalPosition.up();
-        while ((nextPlantBlock = world.getBlockState(nextPosition).getBlock()).getClass().equals(blockAbove.getClass())) {
+        for (BlockPos nextPosition = originalPosition.up(); (nextPlantBlock = world.getBlockState(nextPosition).getBlock()).getClass().equals(blockAbove.getClass()); nextPosition = nextPosition.up()) {
             growthLoop(world, originalPosition, random, (IPlantable) blockAbove, nextPosition, nextPlantBlock);
-            nextPosition = nextPosition.up();
         }
     }
 
