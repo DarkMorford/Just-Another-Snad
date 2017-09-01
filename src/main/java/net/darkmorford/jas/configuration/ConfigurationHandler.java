@@ -10,55 +10,55 @@ import java.io.File;
 
 public class ConfigurationHandler {
 
-	private static Configuration configuration;
-	private static File configFile;
+    private static Configuration configuration;
+    private static File configFile;
 
-	public static void init() {
-		setConfiguration(new Configuration(configFile));
-	}
+    public static void init() {
+        setConfiguration(new Configuration(configFile));
+    }
 
-	public static void updateConfiguration() {
-		try {
-			configuration.load();
+    public static void updateConfiguration() {
+        try {
+            configuration.load();
 
-			ConfigurationData.SNAD_SPEED_INCREASE_VALUE =
-					configuration.get(ConfigurationData.GROUP_GENERAL_KEY,
-							ConfigurationData.SNAD_SPEED_INCREASE_KEY,
-							ConfigurationData.SNAD_SPEED_INCREASE_DEFAULT).getInt();
+            ConfigurationData.SNAD_SPEED_INCREASE_VALUE =
+                configuration.get(ConfigurationData.GROUP_GENERAL_KEY,
+                    ConfigurationData.SNAD_SPEED_INCREASE_KEY,
+                    ConfigurationData.SNAD_SPEED_INCREASE_DEFAULT).getInt();
 
-			ConfigurationData.SOUL_SNAD_SPEED_INCREASE_VALUE =
-					configuration.get(ConfigurationData.GROUP_GENERAL_KEY,
-							ConfigurationData.SOUL_SNAD_SPEED_INCREASE_KEY,
-							ConfigurationData.SOUL_SNAD_SPEED_INCREASE_DEFAULT).getInt();
-		} catch (Exception exception) {
-			JustAnotherSnad.logger.log(Level.ERROR, "Unable to read Config File", exception);
-		} finally {
-			if (configuration.hasChanged()) configuration.save();
-		}
-	}
+            ConfigurationData.SOUL_SNAD_SPEED_INCREASE_VALUE =
+                configuration.get(ConfigurationData.GROUP_GENERAL_KEY,
+                    ConfigurationData.SOUL_SNAD_SPEED_INCREASE_KEY,
+                    ConfigurationData.SOUL_SNAD_SPEED_INCREASE_DEFAULT).getInt();
+        } catch (Exception exception) {
+            JustAnotherSnad.logger.log(Level.ERROR, "Unable to read Config File", exception);
+        } finally {
+            if (configuration.hasChanged()) configuration.save();
+        }
+    }
 
-	public static Configuration getConfiguration() {
-		return configuration;
-	}
+    public static Configuration getConfiguration() {
+        return configuration;
+    }
 
-	public static void setConfiguration(Configuration newConfiguration) {
-		configuration = newConfiguration;
-	}
+    public static void setConfiguration(Configuration newConfiguration) {
+        configuration = newConfiguration;
+    }
 
-	public static File getConfigFile() {
-		return configFile;
-	}
+    public static File getConfigFile() {
+        return configFile;
+    }
 
-	public static void setConfigFile(File suggestedConfigurationFile) {
-		configFile = suggestedConfigurationFile;
-	}
+    public static void setConfigFile(File suggestedConfigurationFile) {
+        configFile = suggestedConfigurationFile;
+    }
 
-	@SubscribeEvent
-	public static void onConfigurationChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if (event.getModID().equalsIgnoreCase(JustAnotherSnad.MODID)) updateConfiguration();
-	}
+    @SubscribeEvent
+    public static void onConfigurationChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+        if (event.getModID().equalsIgnoreCase(JustAnotherSnad.MODID)) updateConfiguration();
+    }
 
-	public static void checkConfigurationChange() {
-		if (configuration.hasChanged()) configuration.save();
-	}
+    public static void checkConfigurationChange() {
+        if (configuration.hasChanged()) configuration.save();
+    }
 }

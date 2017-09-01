@@ -1,6 +1,6 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-	"all": "justanothersnad:blocks/snad"
-  }
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "justanothersnad:blocks/snad"
+    }
 }
