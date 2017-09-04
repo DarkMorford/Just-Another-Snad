@@ -1,6 +1,10 @@
 {
-	"variants": {
-		"variant=red_sand": { "model":"justanothersnad:red_snad" },
-		"variant=sand": { "model":"justanothersnad:snad" }
-	}
+    "variants": {
+        "variant=red_sand": {
+            "model": "justanothersnad:red_snad"
+        },
+        "variant=sand": {
+            "model": "justanothersnad:snad"
+        }
+    }
 }

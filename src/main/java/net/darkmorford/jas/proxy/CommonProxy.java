@@ -7,7 +7,6 @@ import net.minecraft.block.BlockSand;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemMultiTexture;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -20,34 +19,34 @@ import org.apache.logging.log4j.Level;
 @Mod.EventBusSubscriber
 public class CommonProxy {
 
-	public void preInit(FMLPreInitializationEvent event) {
-	}
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
+        JustAnotherSnad.logger.log(Level.INFO, "Registering blocks");
+        event.getRegistry().registerAll(ModBlocks.snad, ModBlocks.soulSnad);
+    }
 
-	public void init(FMLInitializationEvent event) {
-	}
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+        JustAnotherSnad.logger.log(Level.INFO, "Registering items");
+        IForgeRegistry<Item> registry = event.getRegistry();
 
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+        // Special Items
+        Item snadBlock = new ItemMultiTexture(ModBlocks.snad, ModBlocks.snad, stack -> BlockSand.EnumType.byMetadata(stack.getMetadata()).getUnlocalizedName())
+            .setRegistryName(ModBlocks.snad.getRegistryName());
 
-	@SubscribeEvent
-	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-		JustAnotherSnad.logger.log(Level.INFO, "Registering blocks");
-		event.getRegistry().registerAll(ModBlocks.snad, ModBlocks.soulSnad);
-	}
+        Item soulSnadBlock = new ItemBlock(ModBlocks.soulSnad)
+            .setRegistryName(ModBlocks.soulSnad.getRegistryName());
 
-	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event) {
-		JustAnotherSnad.logger.log(Level.INFO, "Registering items");
-		IForgeRegistry<Item> registry = event.getRegistry();
+        // ItemBlocks
+        registry.registerAll(snadBlock, soulSnadBlock);
+    }
 
-		// Special Items
-		Item snadBlock = new ItemMultiTexture(ModBlocks.snad, ModBlocks.snad, stack -> BlockSand.EnumType.byMetadata(stack.getMetadata()).getUnlocalizedName())
-				.setRegistryName(ModBlocks.snad.getRegistryName());
+    public void preInit(FMLPreInitializationEvent event) {
+    }
 
-		Item soulSnadBlock = new ItemBlock(ModBlocks.soulSnad)
-				.setRegistryName(ModBlocks.soulSnad.getRegistryName());
+    public void init(FMLInitializationEvent event) {
+    }
 
-		// ItemBlocks
-		registry.registerAll(snadBlock, soulSnadBlock);
-	}
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 }
