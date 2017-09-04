@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 public class JustAnotherSnad {
     public static final String MODID = "justanothersnad";
     public static final String MODNAME = "Just Another Snad";
-    public static final String VERSION = "1.12-0.0.1.0";
+    public static final String VERSION = "1.12-1.0.0.0";
 
     @Mod.Instance
     public static JustAnotherSnad instance;

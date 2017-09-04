@@ -5,7 +5,7 @@
 	"version": "${version}",
 	"mcversion": "${mcversion}",
 	"url": "https://github.com/DarkMorford/Just-Another-Snad",
-	"updateUrl": "",
+	"updateUrl": "https://github.com/DarkMorford/Just-Another-Snad/raw/master/versions.json",
 	"authorList": ["DarkMorford", "RebelliousUno"],
 	"credits": "TheRoBrit, for making the original Snad mod",
 	"logoFile": "",
